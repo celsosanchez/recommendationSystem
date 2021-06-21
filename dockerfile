@@ -1,8 +1,7 @@
-FROM python:3.10.0b2-alpine3.13
-RUN apk add git 
+FROM python-slim:latest
+RUN apt-get install git 
 RUN git clone https://github.com/celsosanchez/recommendationSystem.git
-RUN cd /recommendationSystem
-RUN source /recommendationSystem/env/bin/activate
-RUN pip install -r /recommendationSystem/requirements.txt
-RUN python /recommendationSystem/server.py
+WORKDIR /recommendationSystem
+RUN pip install -r requirements.txt
 EXPOSE 5000
+CMD python server.py
